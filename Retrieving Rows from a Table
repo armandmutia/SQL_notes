@@ -1,0 +1,76 @@
+
+# SQL SELECT Statement — Retrieving Rows from a Table
+
+> Notes from: *DB0101EN – SELECT statement advanced topics: String Patterns, Ranges, and Sets* (Cognitive Class / Big Data University)
+
+## 1. Retrieve ALL columns and ALL rows
+
+```sql
+SELECT * FROM book;
+```
+
+- `*` = wildcard meaning **all columns**
+- No `WHERE` clause = **all rows** returned
+- Example output columns: `BOOK_ID`, `TITLE`, `EDITION`, `YEAR`, `PRICE`, `ISBN`, `PAGES`, `AISLE`, `DESCRIPTION`
+- Result: `4 record(s) selected.`
+
+**Use case:** quick full dump of a table's contents — good for exploring data, not ideal for production code (pulls unnecessary columns).
+
+---
+
+## 2. Retrieve SPECIFIC columns
+
+```sql
+SELECT book_id, title FROM book;
+```
+
+- Instead of `*`, list only the columns you need, comma-separated, in the order you want them displayed
+- Reduces result set size, clearer output, better performance on large tables
+- Result:
+
+| BOOK_ID | TITLE |
+|---|---|
+| B1 | Getting started with DB2 Express-C |
+| B2 | Database Fundamentals |
+| B3 | Getting started with DB2 App Dev |
+| B4 | Getting started with WAS CE |
+
+`4 record(s) selected.`
+
+---
+
+## 3. Retrieve specific columns WITH a filter (WHERE clause)
+
+```sql
+SELECT book_id, title 
+FROM book
+WHERE book_id = 'B1';
+```
+
+- `WHERE` narrows results to rows matching a condition
+- String/text values go in **single quotes** (`'B1'`)
+- Result:
+
+| BOOK_ID | TITLE |
+|---|---|
+| B1 | Getting started with DB2 Express-C |
+
+`1 record(s) selected.`
+
+---
+
+## Key Takeaways
+
+| Concept | Syntax | Purpose |
+|---|---|---|
+| All columns | `SELECT *` | Quick full view of table |
+| Specific columns | `SELECT col1, col2` | Cleaner, targeted results |
+| Filtering rows | `WHERE condition` | Return only matching rows |
+| String comparison | `WHERE col = 'value'` | Exact match on text (case-sensitive, single quotes) |
+
+**Next topics to cover:** String Patterns (`LIKE`, wildcards `%` `_`), Ranges (`BETWEEN`), and Sets (`IN`).
+
+---
+
+*Part of ongoing SQL/Db2 course notes — IBM Cloud Db2 hands-on labs.*
+
