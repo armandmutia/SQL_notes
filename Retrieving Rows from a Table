@@ -1,4 +1,3 @@
-
 # SQL SELECT Statement — Retrieving Rows from a Table
 
 > Notes from: *DB0101EN – SELECT statement advanced topics: String Patterns, Ranges, and Sets* (Cognitive Class / Big Data University)
@@ -72,5 +71,92 @@ WHERE book_id = 'B1';
 
 ---
 
-*Part of ongoing SQL/Db2 course notes — IBM Cloud Db2 hands-on labs.*
+# SQL SELECT Statement — Sorting the Result Set
 
+> Notes from: *DB0101EN – SELECT statement Sorting result sets* (Cognitive Class / Big Data University)
+
+## 1. Result sets are unordered by default
+
+```sql
+SELECT * FROM book;
+```
+
+- Without any sorting instruction, rows come back in **no guaranteed order** — often just the order they exist in storage
+- To control the order, use the **`ORDER BY`** clause
+
+---
+
+## 2. ORDER BY — sort by column name
+
+```sql
+SELECT title FROM book
+ORDER BY title;
+```
+
+- Add `ORDER BY <column>` at the end of the SELECT statement
+- Default sort direction is **ascending (A→Z, low→high)**
+- Example result — titles sorted alphabetically:
+
+```
+TITLE
+--------------------------------
+Database Fundamentals
+Getting started with DB2 App Dev
+Getting started with DB2 Express-C
+Getting started with WAS CE
+```
+
+---
+
+## 3. ORDER BY — sort using column NUMBER instead of name
+
+```sql
+SELECT title FROM book
+ORDER BY 1;
+```
+
+- Instead of typing the column name, you can use its **position number** in the SELECT column list
+- `1` refers to the 1st column listed (`title`), `2` would refer to the 2nd column, etc.
+- Useful shorthand, but less readable — column names are usually clearer in real code
+
+---
+
+## 4. Sorting by a different column (e.g. PAGES)
+
+```sql
+SELECT * FROM book
+ORDER BY pages;
+```
+
+- Sorts the entire result set based on the values in the `PAGES` column
+- Ascending by default → book with fewest pages appears first
+
+---
+
+## 5. Ascending vs Descending
+
+```sql
+SELECT * FROM book
+ORDER BY pages ASC;   -- ascending (default, can be omitted)
+
+SELECT * FROM book
+ORDER BY pages DESC;  -- descending (highest to lowest)
+```
+
+- `ASC` = ascending (default if omitted)
+- `DESC` = descending — must be stated explicitly
+
+---
+
+## Key Takeaways
+
+| Concept | Syntax | Purpose |
+|---|---|---|
+| Sort ascending (default) | `ORDER BY column` | A→Z / low→high |
+| Sort descending | `ORDER BY column DESC` | Z→A / high→low |
+| Sort by column position | `ORDER BY 1` | Use column's number in SELECT list instead of its name |
+| Sort by any column | `ORDER BY pages`, `ORDER BY title`, etc. | Not limited to columns shown in SELECT |
+
+---
+
+*Part of ongoing SQL/Db2 course notes — IBM Cloud Db2 hands-on labs.*
